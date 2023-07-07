@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Items Sold - {{ item.name }}</h2>
+<ul>
+    {% for transaction in transactions %}
+    <li>
+        Transaction ID: {{ transaction.id }}<br>
+        Quantity: {{ transaction.quantity }}<br>
+        Selling Price: {{ transaction.selling_price }}<br>
+        Transaction Date: {{ transaction.transactiondttm }}
+    </li>
+    {% empty %}
+    <li>No transactions available.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

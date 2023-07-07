@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>All Orders Placed of {{ item.name }}</h2>
+    {% if orders %}
+    <table class="orders-table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Cost</th>
+                <th>Order Date</th>
+                <th>Order Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.item.name }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>${{ order.cost }}</td>
+                <td>{{ order.orderdttm }}</td>
+                <td>
+                    {% if order.is_received %}
+                    <span style="color: green;">Received</span>
+                    {% elif order.is_canceled %}
+                    <span style="color: red;">Canceled</span>
+                    {% else %}
+                    <a href="{% url 'confirm_order_received' order.id %}">Accept Order</a> |
+                    <a href="{% url 'confirm_order_canceled' order.id %}">Decline Order</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No orders placed.</p>
+    {% endif %}
+</div>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/order_history.css' %}">
+{% endblock %}

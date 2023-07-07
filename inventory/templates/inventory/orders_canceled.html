@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Canceled Orders for {{ item.name }}</h2>
+
+    {% if failed_orders %}
+    <table class="orders-table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Cost</th>
+                <th>Order Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in failed_orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.item.name }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>${{ order.cost }}</td>
+                <td>{{ order.orderdttm }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No Canceled orders for {{ item.name }}.</p>
+    {% endif %}
+</div>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/order_history.css' %}">
+{% endblock %}

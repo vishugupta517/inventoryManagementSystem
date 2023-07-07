@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Item Details</h2>
+<h3>Item: {{ item.name }}</h3>
+<p>IIN: {{ item.iin }}</p>
+<p>Cost: {{ item.cost }}</p>
+<p>Quantity: {{ item.quantity }}</p>
+<p>Quantity Sold: {{ item.quantity_sold }}</p>
+<p>Selling Price: {{ item.selling_price }}</p>
+<p>Profit Earned: {{ item.profit_earned }}</p>
+<p>Revenue: {{ item.revenue }}</p>
+
+<h4>Actions:</h4>
+<a href="{% url 'edit_item' item.id %}">Edit Item</a>
+<a href="{% url 'sell_item' item.id %}">Sell Item</a>
+<a href="{% url 'place_order' item_id=item.id %}">Order Item</a>
+<a href="{% url 'item_orders' item.id %}">All Orders</a>
+<a href="{% url 'orders_successed' item.id %}">Accepted Orders</a>
+<a href="{% url 'orders_failed' item.id %}">Declined Orders</a>
+
+{% endblock %}

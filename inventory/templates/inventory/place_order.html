@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Place Order - {{ item.name }}</h2>
+<form method="post" action="{% url 'place_order' item_id=item.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Place Order</button>
+</form>
+{% endblock %}

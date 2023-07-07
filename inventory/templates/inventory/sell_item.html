@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Item : {{ item.name }}</h2>
+    <div class="box">
+        <h2>${{ item.cost }}</h2>
+        <h4>{{ item.name }} #{{ item.iin }}</h4>
+        <div class="details">
+            <h6>Quantity: {{ item.quantity }}</h6>
+            <h6>Quantity Sold: {{ item.quantity_sold }}</h6>
+            <h6>Selling Price: ${{ item.selling_price }}</h6>
+            <h6>Profit Earned: ${{ item.profit_earned }}</h6>
+            <h6>Revenue: ${{ item.revenue }}</h6>
+        </div>
+
+    </div>
+
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+
+    <div class="form_container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="name" value="{{ item.name }}">
+            <input type="hidden" name="item_id" value="{{ item.id }}">
+            <button type="submit" class="sell_btn">Sell !</button>
+        </form>
+    </div>
+</div>
+
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/sell_items.css' %}">
+
+{% endblock %}

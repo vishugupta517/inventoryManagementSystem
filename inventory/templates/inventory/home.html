@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Inventory Management System</h2>
+<h3>Statistics:</h3>
+<p>Total Store Profit: {{ total_profit }}</p>
+<p>Total Items in Stock: {{ total_items }}</p>
+<p>Item with Highest Cost: {{ highest_cost_item }}</p>
+<p>Item with Highest Profits: {{ highest_profit_item }}</p>
+<p>Item Most Sold: {{ most_sold_item }}</p>
+<p>Items Out of Stock: {% for item in out_of_stock_items %}{{ item.name }}, {% endfor %}</p>
+{% load static%}
+<link rel="stylesheet" href="/static/css/home.css">
+{% endblock %}
