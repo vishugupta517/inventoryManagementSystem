@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<form method="post">
+    {% csrf_token %}
+    <div class="create_form">
+        <h2>Create New Item</h2>
+        <div class="row_block">
+            <div class="group">
+                <div class="label">{{ form.name.label_tag }}</div>
+                <div class="content">{{ form.name }}</div>
+            </div>
+            <div class="group">
+                <div class="label">{{ form.iin.label_tag }}</div>
+                <div class="content">{{ form.iin }}</div>
+            </div>
+        </div>
+        <div class="row_block">
+            <div class="group">
+                <div class="label">{{ form.cost.label_tag }}</div>
+                <div class="content">{{ form.cost }}</div>
+            </div>
+            <div class="group">
+                <div class="label">{{ form.quantity.label_tag }}</div>
+                <div class="content">{{ form.quantity }}</div>
+            </div>
+        </div>
+        <div class="full_row">
+            <div class="label">{{ form.selling_price.label_tag }}</div>
+            <div class="content">{{ form.selling_price }}</div>
+        </div>
+        <div>
+            <button class="create_item_btns" type="submit">Submit</button>
+        </div>
+    </div>
+</form>
+
+{% load static %}
+<link rel="stylesheet" href="/static/css/create_item.css">
+{% endblock %}

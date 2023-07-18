@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="delete_container">
+    <form method="post">{% csrf_token %}
+        <h2>Removing "{{ item.name }}" Stock!</h2>
+        <button class="create_item_btns cancel " type="button"
+            onclick="window.location.href='{% url 'item_list' %}'">Cancel</button>
+
+        <input class=" create_item_btns" type="submit" value="Confirm">
+
+        <input type="hidden" name="item_id" value="{{ item_id }}">
+    </form>
+</div>
+<link rel="stylesheet" href="/static/css/delete_item.css">
+{% endblock %}

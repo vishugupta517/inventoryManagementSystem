@@ -1,0 +1,59 @@
+h2,
+h4,
+h6 {
+  text-align: center;
+}
+
+h2 {
+  color: #01024e;
+  padding: 20px;
+}
+
+h6 {
+  padding: 5px;
+}
+
+.form_container {
+  padding: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_container form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#id_quantity {
+  width: 100px;
+  border-radius: 4px;
+}
+
+form label {
+  color: #01024e;
+  font-weight: 500;
+}
+
+.sell_btn {
+  display: inline-block;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background: #000000;
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 5px 12px;
+  margin-top: -16px;
+  margin-left: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 200ms, background 200ms;
+}
+
+.sell_btn:active,
+.sell_btn:hover {
+  transform: translateY(-2px);
+}

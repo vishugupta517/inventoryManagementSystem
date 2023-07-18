@@ -1,0 +1,24 @@
+.delete_container {
+  text-align: center;
+  padding: 95px;
+}
+
+h2 {
+  color: #01024e;
+  padding-bottom: 30px;
+}
+
+.create_item_btns {
+  width: 100px;
+  height: 35px;
+  color: var(--white-100, #fff);
+  border: none;
+  border-radius: 4px;
+  background: var(--cherry, #ff6464);
+  margin-right: 20px;
+}
+
+.cancel {
+  background: var(--bg-light, #f9f6f6);
+  color: #555555;
+}

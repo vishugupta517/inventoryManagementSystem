@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    {% for msg in messages%}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Inventory Alert!</strong> {{msg}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    {% endfor %}
+    <h2>Items</h2>
+    <table id="items_table">
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>IIN</th>
+            <th>Cost</th>
+            <th>Quantity</th>
+            <th>Quantity Sold</th>
+            <th>Selling Price</th>
+            <th>Profit Earned</th>
+            <th>Revenue</th>
+            <th>Manage</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.iin }}</td>
+            <td>{{ item.cost }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.quantity_sold }}</td>
+            <td>{{ item.selling_price }}</td>
+            <td>{{ item.profit_earned }}</td>
+            <td>{{ item.revenue }}</td>
+            <td class="manage">
+                <a href="{% url 'item_details' item.id %}">View</a>
+                <a href="{% url 'edit_item' item.id %}">Edit </a>
+                <a href="{% url 'place_order' item.id %}">Order</a>
+                <a href="{% url 'sell_item' item.id %}">Sell</a>
+                <a href="{% url 'delete_item' item.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/items.css' %}">
+{% endblock %}

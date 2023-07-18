@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main">
+    <div class="top">
+        <p class="main-heading">Item Details</p>
+        <div class="content-box">
+            <div class="content">
+                <p class="heading">{{item.name}}</p>
+                <div class="row-content">
+                    <p class="numbers">{{item.id}}</p>
+                    <p class="numbers">{{item.iin}}</p>
+                </div>
+                <div class="row-content">
+                    <p class="sub-heading">Id</p>
+                    <p class="sub-heading">IIN</p>
+                </div>
+            </div>
+            <div class="content">
+                <p class="heading">Total Products</p>
+                <div class="row-content">
+                    <p class="numbers">{{ item.quantity }}</p>
+                    <p class="numbers">$ {{ item.cost }}</p>
+                </div>
+                <div class="row-content">
+                    <p class="sub-heading">Quantity</p>
+                    <p class="sub-heading">Cost</p>
+                </div>
+            </div>
+            <div class="content">
+                <p class="heading">Total Sales</p>
+                <div class="row-content">
+                    <p class="numbers">{{ item.quantity_sold }}</p>
+                    <p class="numbers">$ {{ item.selling_price }}</p>
+                </div>
+                <div class="row-content">
+                    <p class="sub-heading">Sales</p>
+                    <p class="sub-heading">Selling Price</p>
+                </div>
+            </div>
+            <div class="Revenue">
+                <p class="heading">Revenue/Profit</p>
+                <div class="row-content">
+                    <p class="numbers">$ {{ item.revenue | floatformat }}</p>
+                    <p class="numbers">$ {{ item.profit_earned | floatformat }}</p>
+                </div>
+                <div class="row-content">
+                    <p class="sub-heading">Revenue</p>
+                    <p class="sub-heading">Profit</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="action-btn">
+            <span class="btns"><a class="btns-link" href="{% url 'edit_item' item.id %}">Edit Item</a></span>
+            <span class="btns"><a class="btns-link" href="{% url 'sell_item' item.id %}">Sell Item</a></span>
+            <span class="btns"><a class="btns-link" href="{% url 'place_order' item_id=item.id %}">Order Item</a></span>
+            <span class="btns"><a class="btns-link" href="{% url 'item_orders' item.id %}">All Orders</a></span>
+            <span class="btns"><a class="btns-link" href="{% url 'orders_successed' item.id %}">Accepted
+                    Orders</a></span>
+            <span class="btns"><a class="btns-link" href="{% url 'orders_failed' item.id %}">Declined Orders</a></span>
+            <span class="btns"><a class="btns-link" href="{% url 'item_transactions' item.id %}">Transactions</a></span>
+        </div>
+        <p class="main-heading table-heading">Orders Placed</p>
+        <div class="">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Cost</th>
+                        <th>Order Date</th>
+                        <th>Order Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.item.name }}</td>
+                        <td>{{ order.quantity }}</td>
+                        <td>${{ order.cost }}</td>
+                        <td>{{ order.orderdttm }}</td>
+                        <td>
+                            {% if order.is_received %}
+                            <span style="color: green;">Received</span>
+                            {% elif order.is_canceled %}
+                            <span style="color: red;">Canceled</span>
+                            {% else %}
+                            <a class="accept-btn " href="{% url 'confirm_order_received' order.id %}">Accept
+                                Order</a> |
+                            <a class="decline-btn " href="{% url 'confirm_order_canceled' order.id %}">Decline
+                                Order</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'css/item_details.css' %}">
+{% endblock %}
